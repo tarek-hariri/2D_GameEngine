@@ -44,7 +44,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	std::cout << "Connected to server!" << std::endl;
 
 	queuedMovements = std::unordered_map<uint32_t, sPlayerDescription>();
-	tileMap = new TileMap(8, 8);
+	tileMap = new TileMap(MAP_SIZE, MAP_SIZE);
 	isRunning = true; // tentatively
 	return true;
 }
