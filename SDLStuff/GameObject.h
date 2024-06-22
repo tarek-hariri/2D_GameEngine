@@ -7,7 +7,7 @@ public:
 	GameObject(const char* textureSheet, int initialX, int initialY, int spriteWidth, int spriteHeight);
 	~GameObject();
 
-	void Update(double deltaTime);
+	void Update(double deltaTime, Camera* camera);
 	void Render();
 
 	int getX();
@@ -18,6 +18,9 @@ public:
 
 	void setX(int newPos);
 	void setY(int newPos);
+
+	float getWorldX();
+	float getWorldY();
 
 private:
 	int xPos, yPos;

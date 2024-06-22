@@ -6,6 +6,7 @@
 TileMap* tileMap;
 SDL_Renderer* Game::renderer = nullptr;
 std::unordered_map<Uint32, Player*> players;
+Camera* Game::camera = new Camera;
 
 
 Game::Game() {
@@ -168,16 +169,20 @@ void Game::Update(float deltaTime) {
 		return;
 	}
 
+	// Update camera position
+	camera->update(players[nPlayerID]->getWorldX(), players[nPlayerID]->getWorldY());
+
 	// Update each player
 	for (auto it : players)
-		it.second->Update(deltaTime);
+		it.second->Update(deltaTime, camera);
+
 }
 
 void Game::Render() {
 	SDL_RenderClear(renderer);
 
 	// Draw the map
-	tileMap->Render();
+	tileMap->Render(camera);
 	for (auto it : players)
 		it.second->Render();
 	SDL_RenderPresent(renderer);

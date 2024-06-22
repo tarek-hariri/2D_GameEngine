@@ -6,7 +6,7 @@ class Player : public GameObject {
 public:
 	Player(const char* textureSheet, int initialX, int initialY, TileMap* tileMap, int spriteWidth, int spriteHeight, std::unordered_map<uint32_t, sPlayerDescription>* queuedMovements, uint32_t nUniqueID);
 	bool Move(int dx, int dy);
-	void Update(double deltaTime);
+	void Update(double deltaTime, Camera* camera);
 
 	enum PLAYER_STATE {
 		WALKING,

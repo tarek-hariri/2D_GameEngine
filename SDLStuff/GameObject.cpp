@@ -15,13 +15,13 @@ GameObject::GameObject(const char* spriteSheet, int initialX, int initialY, int 
 	this->spriteWidth = spriteWidth;
 }
 
-void GameObject::Update(double deltaTime) {
+void GameObject::Update(double deltaTime, Camera* camera) {
 	srcRect.x = 0;
 	srcRect.y = 0;
 
 	// Account for sprites bigger than tile size... we want those sprites to render from its position tile upwards, not downwards!
-	destRect.x = worldX * SCALED_TILE_SIZE - ((spriteWidth * SCALE - SCALED_TILE_SIZE)/2); // Dividing by two centers sprite on tile
-	destRect.y = worldY * SCALED_TILE_SIZE - (spriteHeight * SCALE - SCALED_TILE_SIZE + 1*SCALE);
+	destRect.x = camera->getWorldStartX() + worldX * SCALED_TILE_SIZE - ((spriteWidth * SCALE - SCALED_TILE_SIZE) / 2); // Dividing by two centers sprite on tile
+	destRect.y = camera->getWorldStartY() + worldY * SCALED_TILE_SIZE - (spriteHeight * SCALE - SCALED_TILE_SIZE + 1*SCALE);
 	destRect.w = spriteWidth * SCALE;
 	destRect.h = spriteHeight * SCALE;
 }
@@ -52,6 +52,16 @@ void GameObject::setX(int newPos){
 
 void GameObject::setY(int newPos){
 	yPos = newPos;
+}
+
+float GameObject::getWorldX()
+{
+	return worldX;
+}
+
+float GameObject::getWorldY()
+{
+	return worldY;
 }
 
 

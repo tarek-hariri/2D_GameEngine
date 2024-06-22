@@ -8,6 +8,7 @@
 #include "TileMap.h"
 #include "Settings.h"
 #include "../Client/PokemonClient.h"
+#include "Camera.h"
 
 class Game {
 public:
@@ -24,6 +25,7 @@ public:
 	bool running() { return isRunning; }
 
 	static SDL_Renderer* renderer;
+	static Camera* camera;
 
 private:
 	// Connects to server and initiailizes player

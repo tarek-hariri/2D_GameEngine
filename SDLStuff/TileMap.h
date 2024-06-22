@@ -6,13 +6,14 @@
 #include "PerlinNoiseGenerator.h"
 #include "Settings.h"
 #include <vector>
+#include "Camera.h"
 
 
 class TileMap {
 public:
 	TileMap(int width, int height);
 
-	void Render();
+	void Render(Camera* camera);
 
 	Tile* getTile(int x, int y);
 	int getWidth();

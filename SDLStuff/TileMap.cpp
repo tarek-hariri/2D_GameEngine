@@ -31,11 +31,11 @@ TileMap::TileMap(int width, int height) {
 	destRect.h = SCALED_TILE_SIZE;
 }
 
-void TileMap::Render() {
+void TileMap::Render(Camera* camera) {
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
-			destRect.x = x * SCALED_TILE_SIZE;
-			destRect.y = y * SCALED_TILE_SIZE;
+			destRect.x = camera->getWorldStartX() + x * SCALED_TILE_SIZE;
+			destRect.y = camera->getWorldStartY() + y * SCALED_TILE_SIZE;
 			switch (tiles[x][y]->getTerrain()) {
 				case GRASS_1:
 					TextureManager::Draw(grass_1_texture, srcRect, destRect);

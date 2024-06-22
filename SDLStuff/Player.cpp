@@ -50,7 +50,7 @@ bool Player::Move(int dx, int dy)
 	return true;
 }
 
-void Player::Update(double deltaTime) {
+void Player::Update(double deltaTime, Camera* camera) {
 	if (state == PLAYER_STATE::WALKING) {
 		animTimer += deltaTime/1000;
 		setWorldX(lerp(srcX, destX, animTimer / ANIM_TIME));
@@ -67,7 +67,7 @@ void Player::Update(double deltaTime) {
 			}
 		}
 	}
-	GameObject::Update(deltaTime);
+	GameObject::Update(deltaTime, camera);
 }
 
 void Player::InitializeMove(int dx, int dy){
