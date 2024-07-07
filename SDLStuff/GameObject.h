@@ -4,8 +4,7 @@
 
 class GameObject {
 public:
-	GameObject(const char* textureSheet, int initialX, int initialY, int spriteWidth, int spriteHeight);
-	~GameObject();
+	GameObject(std::string textureSheet, int initialX, int initialY, int spriteWidth, int spriteHeight);
 
 	void Update(double deltaTime, Camera* camera);
 	void Render();
@@ -21,6 +20,8 @@ public:
 
 	float getWorldX();
 	float getWorldY();
+
+	void setTexture(SDL_Texture* sprite);
 
 private:
 	int xPos, yPos;

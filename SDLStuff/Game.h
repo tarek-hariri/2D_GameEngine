@@ -9,6 +9,7 @@
 #include "Settings.h"
 #include "../Client/PokemonClient.h"
 #include "Camera.h"
+#include "DIRECTION.h"
 
 class Game {
 public:

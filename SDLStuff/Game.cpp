@@ -80,15 +80,37 @@ void Game::HandleEvents() {
 	// Might want to change logic to prioritize direction that aligns with last move?
 	if (keystates[SDL_SCANCODE_UP]) {
 		moving = players[nPlayerID]->Move(0, -1);
+		if (!moving) {
+			sPlayerDescription desc = sPlayerDescription{ nPlayerID, players[nPlayerID]->getX(), players[nPlayerID]->getY() - 1 };
+			queuedMovements.insert_or_assign(nPlayerID, desc);
+		}
 	}
 	else if (keystates[SDL_SCANCODE_DOWN]) {
 		moving = players[nPlayerID]->Move(0, 1);
+
+		if (!moving) {
+			sPlayerDescription desc = sPlayerDescription{ nPlayerID, players[nPlayerID]->getX(), players[nPlayerID]->getY() + 1 };
+			queuedMovements.insert_or_assign(nPlayerID, desc);
+		}
 	}
 	else if (keystates[SDL_SCANCODE_RIGHT]) {
 		moving = players[nPlayerID]->Move(1, 0);
+
+		if (!moving) {
+			sPlayerDescription desc = sPlayerDescription{ nPlayerID, players[nPlayerID]->getX() + 1, players[nPlayerID]->getY()};
+			queuedMovements.insert_or_assign(nPlayerID, desc);
+		}
 	}
 	else if (keystates[SDL_SCANCODE_LEFT]) {
+		if (!moving) {
+			sPlayerDescription desc = sPlayerDescription{ nPlayerID, players[nPlayerID]->getX() - 1, players[nPlayerID]->getY()};
+			queuedMovements.insert_or_assign(nPlayerID, desc);
+		}
 		moving = players[nPlayerID]->Move(-1, 0);
+	}
+	// No movements, empty da queue
+	else {
+		queuedMovements.erase(nPlayerID);
 	}
 
 	if (moving) {
@@ -99,8 +121,6 @@ void Game::HandleEvents() {
 		msg << desc;
 		client.Send(msg);
 	}
-
-
 	
 }
 
@@ -129,7 +149,8 @@ void Game::Update(float deltaTime) {
 			case(GameMsg::Game_AddPlayer): {
 				sPlayerDescription desc;
 				msg >> desc;
-				players.insert_or_assign(desc.nUniqueID, new Player("assets/redsinglesprite.png", desc.xPos, desc.yPos, tileMap, 14, 19, &queuedMovements, desc.nUniqueID));
+
+				players.insert_or_assign(desc.nUniqueID, new Player(std::string("assets/redsinglesprite.png"), desc.xPos, desc.yPos, tileMap, 14, 19, &queuedMovements, desc.nUniqueID, std::string("assets/red_sprites/")));
 
 				if (waitingForConnection && desc.nUniqueID == nPlayerID) {
 					// Our player is in! 

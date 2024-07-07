@@ -2,7 +2,7 @@
 #include "TextureManager.h"
 #include "Settings.h"
 
-GameObject::GameObject(const char* spriteSheet, int initialX, int initialY, int spriteWidth, int spriteHeight) {
+GameObject::GameObject(std::string spriteSheet, int initialX, int initialY, int spriteWidth, int spriteHeight) {
 	objTexture = TextureManager::LoadTexture(spriteSheet);
 	
 	xPos, worldX = initialX;
@@ -54,14 +54,17 @@ void GameObject::setY(int newPos){
 	yPos = newPos;
 }
 
-float GameObject::getWorldX()
-{
+float GameObject::getWorldX(){
 	return worldX;
 }
 
-float GameObject::getWorldY()
-{
+float GameObject::getWorldY(){
 	return worldY;
+}
+
+void GameObject::setTexture(SDL_Texture* sprite) {
+	// TODO: Need to somehow dereference the initial sprite. Could add bool when making GameObject indicating if its a Player or something that will need to eventually deallocate here
+	this->objTexture = sprite;
 }
 
 
