@@ -83,6 +83,7 @@ void Game::HandleEvents() {
 		if (!moving) {
 			sPlayerDescription desc = sPlayerDescription{ nPlayerID, players[nPlayerID]->getX(), players[nPlayerID]->getY() - 1 };
 			queuedMovements.insert_or_assign(nPlayerID, desc);
+
 		}
 	}
 	else if (keystates[SDL_SCANCODE_DOWN]) {
@@ -112,6 +113,8 @@ void Game::HandleEvents() {
 	else {
 		queuedMovements.erase(nPlayerID);
 	}
+	
+
 
 	if (moving) {
 		olc::net::message<GameMsg> msg;
@@ -119,7 +122,20 @@ void Game::HandleEvents() {
 
 		sPlayerDescription desc = sPlayerDescription{ nPlayerID, players[nPlayerID]->getX(), players[nPlayerID]->getY() };
 		msg << desc;
+
 		client.Send(msg);
+	}
+
+	// If a queued move was executed for this player-controlled character
+	else if (players[nPlayerID]->getExecutedQueuedMove()){
+		olc::net::message<GameMsg> msg;
+		msg.header.id = GameMsg::Game_UpdatePlayer;
+
+		sPlayerDescription desc = sPlayerDescription{ nPlayerID, players[nPlayerID]->getX(), players[nPlayerID]->getY() };
+		msg << desc;
+
+		client.Send(msg);
+		players[nPlayerID]->resetExecutedQueuedMove();
 	}
 	
 }

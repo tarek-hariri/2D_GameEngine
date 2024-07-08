@@ -16,6 +16,9 @@ public:
 		STANDING
 	};
 
+	bool getExecutedQueuedMove();
+	void resetExecutedQueuedMove();
+
 private:
 	void InitializeMove(int dx, int dy);
 	void FinishMove();
@@ -45,5 +48,9 @@ private:
 
 	std::unordered_map<uint32_t, sPlayerDescription>* queuedMovements;
 	uint32_t nUniqueID;
+
+	bool executedQueuedMove = false;
+	int queuedDx = -1;
+	int queuedDy = -1;
 
 };

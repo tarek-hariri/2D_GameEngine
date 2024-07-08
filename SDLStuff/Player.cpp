@@ -22,7 +22,6 @@ Player::Player(std::string textureSheet, int initialX, int initialY, TileMap* ti
 	this->nUniqueID = nUniqueID;
 	this->facing = DIRECTION::SOUTH;
 
-
 	// Load walking textures
 	SDL_Texture* northwalk_0 = TextureManager::LoadTexture(animSetDir + "NORTHWALK_0.png");
 	SDL_Texture* northwalk_1 = TextureManager::LoadTexture(animSetDir + "NORTHWALK_1.png");
@@ -114,6 +113,10 @@ void Player::Update(double deltaTime, Camera* camera) {
 				int moveX = (*queuedMovements)[nUniqueID].xPos - getX();
 				int moveY = (*queuedMovements)[nUniqueID].yPos - getY();
 				Move(moveX, moveY);
+
+				this->executedQueuedMove = true;
+				queuedDx = moveX;
+				queuedDy = moveY;
 			}
 			else
 				walkTimer = 0;
@@ -123,6 +126,14 @@ void Player::Update(double deltaTime, Camera* camera) {
 	GameObject::setTexture(this->getSprite());
 
 	GameObject::Update(deltaTime, camera);
+}
+
+bool Player::getExecutedQueuedMove(){
+	return executedQueuedMove;
+}
+
+void Player::resetExecutedQueuedMove(){
+	executedQueuedMove = false;
 }
 
 void Player::InitializeMove(int dx, int dy){
