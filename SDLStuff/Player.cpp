@@ -113,6 +113,7 @@ void Player::Update(double deltaTime, Camera* camera) {
 				int moveX = (*queuedMovements)[nUniqueID].xPos - getX();
 				int moveY = (*queuedMovements)[nUniqueID].yPos - getY();
 				Move(moveX, moveY);
+				queuedMovements->erase(nUniqueID);
 
 				this->executedQueuedMove = true;
 				queuedDx = moveX;
