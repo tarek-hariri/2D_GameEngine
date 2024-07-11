@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Pokemon">
+      <UniqueIdentifier>{dd2b3d79-360f-42f0-becf-edaf4c563b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pokemon">
+      <UniqueIdentifier>{56d568b8-2239-4d95-a561-c0fd443113c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetCommon.h">
@@ -24,10 +30,25 @@
     <ClInclude Include="PokemonServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="subprocess.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleRegistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pokemon.h">
+      <Filter>Header Files\Pokemon</Filter>
+    </ClInclude>
+    <ClInclude Include="NATURE.h">
+      <Filter>Header Files\Pokemon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PokemonServer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pokemon.cpp">
+      <Filter>Source Files\Pokemon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

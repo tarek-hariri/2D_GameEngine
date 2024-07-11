@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimationSet.cpp" />
+    <ClCompile Include="EncounterTile.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="AnimationSet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DIRECTION.h" />
+    <ClInclude Include="EncounterTile.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PerlinNoise.hpp" />

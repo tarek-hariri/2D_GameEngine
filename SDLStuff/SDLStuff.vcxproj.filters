@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Procedural Generation">
+      <UniqueIdentifier>{be0d2bbb-7802-4877-990c-5c7c640254bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Procedural Generation">
+      <UniqueIdentifier>{977d7d6e-ef6b-4e28-b04e-7e6a49f3fa9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,10 +39,13 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PerlinNoiseGenerator.cpp">
+    <ClCompile Include="AnimationSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationSet.cpp">
+    <ClCompile Include="PerlinNoiseGenerator.cpp">
+      <Filter>Source Files\Procedural Generation</Filter>
+    </ClCompile>
+    <ClCompile Include="EncounterTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,12 +74,6 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PerlinNoiseGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PerlinNoise.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -79,6 +82,15 @@
     </ClInclude>
     <ClInclude Include="DIRECTION.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoise.hpp">
+      <Filter>Header Files\Procedural Generation</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoiseGenerator.h">
+      <Filter>Header Files\Procedural Generation</Filter>
+    </ClInclude>
+    <ClInclude Include="EncounterTile.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

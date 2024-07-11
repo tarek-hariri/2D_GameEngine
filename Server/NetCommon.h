@@ -12,7 +12,13 @@ enum class GameMsg : uint32_t {
 
 	Game_AddPlayer,
 	Game_RemovePlayer,
-	Game_UpdatePlayer
+	Game_UpdatePlayer,
+
+	Client_BeginEncounter,
+	Client_BeginBattle,
+	Client_MakeMove,
+
+	Server_InitializedBattle
 };
 
 struct sPlayerDescription {

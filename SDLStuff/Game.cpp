@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "EncounterTile.h"
 #include "Player.h"
 #include "TextureManager.h"
 
@@ -7,6 +8,8 @@ TileMap* tileMap;
 SDL_Renderer* Game::renderer = nullptr;
 std::unordered_map<Uint32, Player*> players;
 Camera* Game::camera = new Camera;
+
+std::vector<EncounterTile*> game_objects;
 
 
 Game::Game() {
@@ -47,6 +50,9 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	queuedMovements = std::unordered_map<uint32_t, sPlayerDescription>();
 	tileMap = new TileMap(MAP_SIZE, MAP_SIZE);
 	isRunning = true; // tentatively
+
+	game_objects.push_back(new EncounterTile("assets/tallgrass.png", 2, 3, 16, 16));
+
 	return true;
 }
 
@@ -166,7 +172,7 @@ void Game::Update(float deltaTime) {
 				sPlayerDescription desc;
 				msg >> desc;
 
-				players.insert_or_assign(desc.nUniqueID, new Player(std::string("assets/redsinglesprite.png"), desc.xPos, desc.yPos, tileMap, 14, 19, &queuedMovements, desc.nUniqueID, std::string("assets/red_sprites/")));
+				players.insert_or_assign(desc.nUniqueID, new Player(std::string("assets/redsinglesprite.png"), desc.xPos, desc.yPos, tileMap, 16, 24, &queuedMovements, desc.nUniqueID, std::string("assets/red_sprites/")));
 
 				if (waitingForConnection && desc.nUniqueID == nPlayerID) {
 					// Our player is in! 
@@ -206,8 +212,24 @@ void Game::Update(float deltaTime) {
 		return;
 	}
 
+	// TO DO: THIS IS NOT GOOD WHEN YOU HAVE A BIG MAP!!!!!! Figure out a way to check the "tile" the player is standing on, once you implement a World/consolidate the map and stuff into one entity.
+	for (auto tile : game_objects) {
+		if (players[nPlayerID]->getX() == tile->getX() && players[nPlayerID]->getY() == tile->getY()) {
+			if (tile->checkEncounter()) {
+				// Send message to server requesting an encounter for the given tile
+				olc::net::message<GameMsg> msg;
+				msg.header.id = GameMsg::Client_BeginEncounter;
+				client.Send(msg);
+			}
+		}
+	}
+
 	// Update camera position
 	camera->update(players[nPlayerID]->getWorldX(), players[nPlayerID]->getWorldY());
+	
+	// Update each world object
+	for (auto it : game_objects)
+		it->Update(deltaTime, camera);
 
 	// Update each player
 	for (auto it : players)
@@ -220,8 +242,14 @@ void Game::Render() {
 
 	// Draw the map
 	tileMap->Render(camera);
+
+	for (auto it : game_objects)
+		it->Render();
+
 	for (auto it : players)
 		it.second->Render();
+	
+	// okay the issue is that camera... figure out how to pupt game objects into the tilemap/world
 	SDL_RenderPresent(renderer);
 }
 

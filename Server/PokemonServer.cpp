@@ -1,5 +1,6 @@
 #include "PokemonServer.h"
 
+//using namespace subprocess;
 
 
 
@@ -48,6 +49,18 @@ void PokemonServer::OnMessage(std::shared_ptr<olc::net::connection<GameMsg>> cli
 	case GameMsg::Game_UpdatePlayer:{
 		MessageAllClients(msg, client);
 		break;
+	}
+	case GameMsg::Client_BeginEncounter:{
+		// determine encounter (lookup player position in worldmap)
+		
+		// load player's team
+
+		// initialize simulation
+		//std::filesystem::current_path("pokemon-showdown");
+		//auto ret = call("./pokemon-showdown simulate-battle");
+		
+		// send battle info to client
+
 	}
 
 	}

@@ -5,9 +5,11 @@
 GameObject::GameObject(std::string spriteSheet, int initialX, int initialY, int spriteWidth, int spriteHeight) {
 	objTexture = TextureManager::LoadTexture(spriteSheet);
 	
-	xPos, worldX = initialX;
-	yPos, worldY = initialY;
-
+	xPos = initialX;
+	worldX = initialX;
+	yPos = initialY;
+	worldY = initialY;
+	
 	srcRect.h = spriteHeight * SCALE;
 	srcRect.w = spriteWidth * SCALE;
 
