@@ -512,7 +512,7 @@ namespace subprocess {
         {
             size_t nwritten = 0;
             while (nwritten < length) {
-                int written = write(fd, buf + nwritten, length - nwritten);
+                int written = _write(fd, buf + nwritten, length - nwritten);
                 if (written == -1) return -1;
                 nwritten += written;
             }

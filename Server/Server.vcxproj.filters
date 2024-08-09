@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Pokemon">
       <UniqueIdentifier>{56d568b8-2239-4d95-a561-c0fd443113c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include=".bin">
+      <UniqueIdentifier>{0eaec2eb-f3c2-4bee-b8ab-b2602ff276b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetCommon.h">
@@ -50,5 +53,11 @@
     <ClCompile Include="Pokemon.cpp">
       <Filter>Source Files\Pokemon</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".bin\node.cmd">
+      <Filter>.bin</Filter>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

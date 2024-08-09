@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include=".bin">
+      <UniqueIdentifier>{93ba1c45-4bfe-4748-906e-d41a39a256cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PokemonClient.cpp">
@@ -23,5 +26,11 @@
     <ClInclude Include="PokemonClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".bin\node.cmd">
+      <Filter>.bin</Filter>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

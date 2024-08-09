@@ -1,6 +1,6 @@
 #include "PokemonServer.h"
 
-//using namespace subprocess;
+using namespace subprocess;
 
 
 
@@ -56,10 +56,61 @@ void PokemonServer::OnMessage(std::shared_ptr<olc::net::connection<GameMsg>> cli
 		// load player's team
 
 		// initialize simulation
-		//std::filesystem::current_path("pokemon-showdown");
-		//auto ret = call("./pokemon-showdown simulate-battle");
+		std::filesystem::current_path("pokemon-showdown");
+		auto sim = Popen("node pokemon-showdown simulate-battle", input{ PIPE }, output{ PIPE });
+
+		auto msg = ">start {\"formatid\":\"gen7randombattle\"}\n";
+		sim.send(msg, strlen(msg));
+
+		auto msg2 = ">player p1 {\"name\":\"Alice\"}\n";
+		sim.send(msg2, strlen(msg2));
+
+		auto msg3 = ">player p2 {\"name\":\"Bob\"}\n";
+		sim.send(msg3, strlen(msg3));
+
+		olc::net::message<GameMsg> msgInitializedBattle;
+		msgInitializedBattle.header.id = GameMsg::Server_InitializedBattle;
 		
-		// send battle info to client
+		MessageClient(client, msgInitializedBattle);
+
+
+		int turn = 1;
+		std::string thisLine;
+		int thisCharacter;
+
+		// Battle loop
+		while (true) {
+			while ((thisCharacter = fgetc(sim.output())) != EOF) {
+				//print the character to a string
+				printf("%c", thisCharacter);
+				if (thisCharacter == '\n')
+					thisLine = "";
+				else
+					thisLine += thisCharacter;
+
+				if (turn <= 9) {
+					if (std::regex_match(thisLine, std::regex("\\|turn\\|[0-9]{1}")))
+						break;
+				}
+				else if (turn <= 99) {
+
+				}
+				else if (turn <= 999) {
+
+				}
+				// Quickest stall matchup
+				else {
+
+				}
+			}
+
+			// send battle info to client
+
+			// Gather input from both sides, format it into message, send
+			std::string input;
+
+			sim.send(input.c_str(), input.length());
+		}
 
 	}
 
@@ -88,6 +139,7 @@ void PokemonServer::OnClientDisconnect(std::shared_ptr<olc::net::connection<Game
 int main() {
 	PokemonServer server(60000);
 	server.Start();
+
 
 	while (1) {
 		server.Update(-1, true);

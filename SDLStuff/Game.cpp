@@ -203,6 +203,9 @@ void Game::Update(float deltaTime) {
 					queuedMovements.insert_or_assign(desc.nUniqueID, desc);
 				}
 			}
+			case(GameMsg::Server_InitializedBattle): {
+
+			}
 
 			}
 		}

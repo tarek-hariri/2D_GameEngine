@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Procedural Generation">
       <UniqueIdentifier>{977d7d6e-ef6b-4e28-b04e-7e6a49f3fa9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include=".bin">
+      <UniqueIdentifier>{c53e8091-4743-48a3-bef9-4e2955eb6388}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,5 +95,11 @@
     <ClInclude Include="EncounterTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".bin\node.cmd">
+      <Filter>.bin</Filter>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
