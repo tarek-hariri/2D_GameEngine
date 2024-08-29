@@ -27,10 +27,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include=".bin\node.cmd">
-      <Filter>.bin</Filter>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
 </Project>
