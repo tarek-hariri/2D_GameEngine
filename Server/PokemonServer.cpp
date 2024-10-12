@@ -78,6 +78,8 @@ int main() {
 	PokemonServer server(60000);
 	server.Start();
 
+	ShowdownService* showdown = new ShowdownService();
+
 
 	while (1) {
 		server.Update(-1, true);
